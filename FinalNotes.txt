@@ -1,0 +1,37 @@
+CODE EXPLANATION
+Dataset Functions:
+Partition_by_week() - The output shows the dataset with a week number attached
+Week_count() - This counts the number of distinct weeks within the dataset
+Vote_count_per_week() - Sums the number of votes per week
+Average() - The comparison average, calculates the overall average of the votes. Used to make the vote outlier comparison 
+
+Variable section:
+All functions are then saved in variables to be used in future functions, certain variables had to be transformed into int types to accommodate various mathematical functions. They were also converted to run tests, however, a few were int types within lists, which was accommodated in the Pytest answer.
+comperminus/comperplus - calculates the -/+ 20% of the average
+
+Calculating Outliers:
+Non_outliers() - lists the weekly votes that are non-outliers, this was done in the hope to eliminate them from a future list so that only the outliers were left, however as I continued my plan for this function was not feasible with the output I wanted to accomplish.
+Outliers() – Does the reverse of nonoutliers and outputs the actual outliers in the dataset. The code only outputs the vote_count_per_week number as its using the ‘weeklyvote’ variable.
+Outliers_date() – This function does virtually the same as outliers() however with this function we have the option of outputting the week date rather than just the sum of votes for that week. The function could also be expanded to include both the sum of votes and the date or any other column that one would want to include, however it didn’t prove to be needed as we cannot eliminate outliers that are not outliers due to the previous week being an outlier.
+Non_outliers, outliers, and outliers_date can also be edited to calculate a count for each specified function, this way they can be compared to the count of the final outliers.
+
+Final Solution:
+Total_outliers() – This function eliminates the outliers that do not stay outliers due to the previous week being an outlier, it returns a count of how many final outliers there are
+Final_solution() – This is the requested solution for the coding challenge, it outputs the correct outliers with their weekly date, the sum of votes, and week number
+It seems as though this function can be improved upon as final_solution() displays three consecutive dates. At one point when I was verifying total_outliers(), its output was 12, then I ran it again without changing anything which made the output 13, and its stayed 13 since. I am unsure what caused the discrepancy and I have tried to rectify the issue but to no avail. 
+
+
+DATA QUALITY ISSUES
+Data quality could decrease due to date duplication, this is commonly a human error, where data has been entered twice. To resolve this issue we could need to get rid of duplicates before transforming the data to our needs, it seems as though Id and PostId would need to be used together to identify the duplicated data. 
+
+
+CHANGE FOR 10TB DATASET
+The changes I would make to the dataset to accommodate a 10TB dataset would be:
+•	Eliminate any duplicate data
+•	Make sure that the data is consistent in its formatting
+•	Separate the data by year the place each year into a view (maybe temporary), this way I can work with smaller datasets at a time. Once the outliers have been identified I can join the dataset back together or keep them separated depending on which is preferred. Working with a smaller dataset would allow for better accuracy of the data transformation.
+•	Separating the data would also benefit the average, as having too many outliers included in the average calculation may cause the data to be highly inaccurate
+
+CHANGES FOR 5GB OF DATA ARRIVING DAILY
+•	As the outliers are calculated on a weekly basis new daily data would need to be accumulated till the end of the week. 
+•	Then join the new batch of data in the pre-existing dataset. From then we can work with the data as usual
